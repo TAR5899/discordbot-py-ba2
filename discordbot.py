@@ -1,13 +1,7 @@
-from cmath import log
-from distutils.sysconfig import PREFIX
 import discord
-from dotenv import load_dotenv
 import os
-load_dotenv()
 from discord.ext import commands
 
-PREFIX = os.environ['PREFIX']
-TOKEN = os.environ['TOKEN']
 
 bot_prefix = "!"  # 봇의 접두사를 지정합니다.
 intents = discord.Intents.default()  # 기본 의도를 사용합니다.
@@ -39,7 +33,5 @@ async def on_button_click(interaction):
             await interaction.author.add_roles(1034824593678012489) # 비공개 채널에 접근 가능한 역할 ID를 입력하세요.
             await interaction.response.send_message('비공개 채널에 입장하셨습니다!', ephemeral=True)
 
-try:
-    bot.run(TOKEN)
-except discord.errors.LoginFailure as e:
-    print("Improper token has been passed.")
+access_token = os.environ["TOKEN"]
+bot.run(access_token)
